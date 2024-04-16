@@ -1,0 +1,55 @@
+:root {
+  --primary-color: #8575e4;
+  --navbar-color: #f9fbfd;
+  --bg-color: #ffffff;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 100%;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  /* color: ${colors.white};
+    background-color: ${colors.background}; */
+  color:;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+#root {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+br.mobile-only {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 9px;
+  }
+  br.mobile-only {
+    display: block;
+  }
+
+  br.desktop-only {
+    display: none;
+  }
+}
