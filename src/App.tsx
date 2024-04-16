@@ -1,11 +1,12 @@
 import React from 'react';
-import { Navbar } from './components';
+
+import { Calendar } from './components';
 
 export const App: React.FC = () => {
   return (
-    <div>
-      <Navbar />
-      <h1>Hello World</h1>
+    <div className="flex justify-between p-8">
+      <Calendar />
+      <h1 className="text-xl">Hello World</h1>
     </div>
   );
 };

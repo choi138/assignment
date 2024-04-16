@@ -64,6 +64,9 @@
     {
       "files": ["**/*.ts?(x)"],
       "parser": "@typescript-eslint/parser",
+       "parserOptions": {
+        "project": ["./tsconfig.json", "./tsconfig.node.json"]
+      },
       "extends": ["plugin:@typescript-eslint/recommended"],
       "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off",
