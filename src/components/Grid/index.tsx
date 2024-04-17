@@ -50,10 +50,10 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, CellCo
       </div>
       <div className="flex-col w-11/12">
         <div
+          className="py-4"
           style={{
             display: 'grid',
             gridTemplateColumns: `repeat(${days.length}, minmax(0, 1fr))`,
-            gridTemplateRows: `repeat(${days[0].cells.length}, minmax(${rowHeight}px, 1fr))`,
           }}
         >
           {days.map(({ isToday, isWeekend, dayOfMonthWithZero, date, shortName }) => (
@@ -73,17 +73,35 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, CellCo
               </div>
             </div>
           ))}
-          {days.map((day) =>
-            day.cells.map((cell) => (
-              <button
-                key={getUnixTime(cell.date)}
-                className="relative border-t-2 border-r-2 border-gray transition-colors cursor-pointer hover:bg-gray disabled:bg-gray"
-                disabled={cell.disabled}
-                onClick={() => onCellClick?.(cell)}
-              >
-                {CellContent && CellContent(cell)}
-              </button>
-            )),
+        </div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${days.length}, minmax(0, 1fr))`,
+            gridTemplateRows: `repeat(${days[0].cells.length}, minmax(${rowHeight}px, 1fr))`,
+          }}
+        >
+          {days.map((day, dayIndex) =>
+            day.cells.map((cell, cellIndex) => {
+              const disableSelectedTime = cell.hourAndMinute === '새벽 3시' || cell.hourAndMinute === '오후 14시';
+
+              return (
+                <button
+                  key={getUnixTime(cell.date)}
+                  className={`relative ${!disableSelectedTime && 'border-r-2'} border-t-2  border-[#E2E7EB] transition-colors cursor-pointer hover:bg-gray disabled:bg-gray`}
+                  disabled={cell.disabled || disableSelectedTime}
+                  style={{
+                    gridRowStart: cellIndex + 1,
+                    gridRowEnd: cellIndex + 2,
+                    gridColumnStart: dayIndex + 1,
+                    gridColumnEnd: dayIndex + 2,
+                  }}
+                  onClick={() => onCellClick?.(cell)}
+                >
+                  {CellContent && CellContent(cell)}
+                </button>
+              );
+            }),
           )}
         </div>
       </div>

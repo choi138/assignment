@@ -103,10 +103,10 @@ export const useWeekView = ({
       },
     )
       .filter((date) => CONVERT_TIME[format(date, 'HH:mm')])
-      .map((date) => ({
-        date,
-        hourAndMinute: CONVERT_TIME[format(date, 'HH:mm')],
-        disabled: disabledCell ? disabledCell(date) : false,
+      .map((hour) => ({
+        date: hour,
+        hourAndMinute: CONVERT_TIME[format(hour, 'HH:mm')],
+        disabled: disabledCell ? disabledCell(hour) : false,
       })),
   }));
 
