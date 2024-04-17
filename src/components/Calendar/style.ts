@@ -6,6 +6,10 @@ export const calendarCss = `
     color: ${colors.black};
   }
 
+  .rdp-button:hover:not([disabled]) {
+    background-color: ${colors.primaryHover};
+  }
+
   .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
     background-color: ${colors.primaryHover};
   }
