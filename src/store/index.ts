@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { weekStore } from './weekStore';
+import { startOfTheWeekStore } from './startOfTheWeekStore';
 
 export const store = configureStore({
   reducer: {
-    weekStore: weekStore.reducer, // counter에 대한 reducer
+    startOfTheWeekStore: startOfTheWeekStore.reducer, // counter에 대한 reducer
   },
 });
 
