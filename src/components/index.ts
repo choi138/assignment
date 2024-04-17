@@ -1,3 +1,2 @@
 export * from './Calendar';
-export * from './Schedule';
-export * from './WeekOfDaysCard';
+export * from './WeekView';

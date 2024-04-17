@@ -1,6 +1,9 @@
 import { colors } from 'src/css';
 
 export const calendarCss = `
+  .rdp {
+    margin: 0;
+  }
   .rdp-day_selected {
     background-color: transparent;
     color: ${colors.black};
