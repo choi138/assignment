@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Day,
@@ -36,6 +36,7 @@ export const useWeekView = ({
   disabledWeek,
 }: UseWeekViewProps | undefined = {}) => {
   const startOfTheWeekStore = useSelector((state: RootState) => state.startOfTheWeekStore);
+  const dispatch = useDispatch();
 
   const [startOfTheWeek, setStartOfTheWeek] = useState(
     startOfWeek(startOfDay(initialDate || new Date()), { weekStartsOn }),
@@ -45,12 +46,14 @@ export const useWeekView = ({
     const nextWeek = addDays(startOfTheWeek, 7);
     if (disabledWeek && disabledWeek(nextWeek)) return;
     setStartOfTheWeek(nextWeek);
+    dispatch({ type: 'dateStore/setDate', payload: nextWeek.toISOString() });
   };
 
   const previousWeek = () => {
     const previousWeek = addDays(startOfTheWeek, -7);
     if (disabledWeek && disabledWeek(previousWeek)) return;
     setStartOfTheWeek(previousWeek);
+    dispatch({ type: 'dateStore/setDate', payload: previousWeek.toISOString() });
   };
 
   const goToToday = () => {

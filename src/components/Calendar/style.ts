@@ -1,11 +1,31 @@
 import { colors } from 'src/css';
 
 export const calendarCss = `
+  .rdp-day_outside {
+    opacity: 1;
+  }
+
+  .past-days{
+    color: rgba(0, 0, 0, 0.5);
+  }
+
   .rdp {
     margin: 0;
   }
+
   .rdp-day_selected {
     background-color: transparent;
+  }
+
+  .rdp-day_selected:not(.past-days) {
+    color: ${colors.black};
+  }
+
+  .rdp-day_selected:hover {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .rdp-day_selected:hover:not(.past-days) {
     color: ${colors.black};
   }
 
