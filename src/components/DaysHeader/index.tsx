@@ -10,8 +10,8 @@ export interface DaysHeaderProps {
 
 export const DaysHeader: React.FC<DaysHeaderProps> = ({ days }) => {
   return (
-    <div className="sticky top-0 z-30 flex-none py-3">
-      <div className="grid grid-cols-7 text-sm leading-6 ">
+    <div className="sticky top-0 z-30 flex-none py-3 flex items-center justify-center ">
+      <div className="grid grid-cols-7 text-sm leading-6 w-11/12 relative right-2">
         {days.map(({ isToday, isWeekend, dayOfMonthWithZero, date, shortName }) => (
           <div key={getUnixTime(date)} className={`flex items-center justify-center`}>
             <div className={`flex-col center ${isWeekend ? 'text-weekend' : 'text-black'}`}>

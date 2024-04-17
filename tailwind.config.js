@@ -13,6 +13,9 @@ export default {
         weekend: {
           DEFAULT: '#E74555',
         },
+        gray: {
+          DEFAULT: '#ECF0F5',
+        },
       },
     },
   },

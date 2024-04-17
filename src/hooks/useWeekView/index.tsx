@@ -17,6 +17,27 @@ import {
 
 import { RootState } from 'src/store';
 
+const CONVERT_TIME: { [key: string]: string } = {
+  '00:00': '자정 0시',
+  '01:00': '새벽 1시',
+  '02:00': '새벽 2시',
+  '03:00': '새벽 3시',
+  '05:00': '오전 5시',
+  '06:00': '오전 6시',
+  '07:00': '오전 7시',
+  '08:00': '오전 8시',
+  '09:00': '오전 9시',
+  '10:00': '오전 10시',
+  '11:00': '오전 11시',
+  '12:00': '점오 12시',
+  '13:00': '오후 13시',
+  '14:00': '오후 14시',
+  '19:00': '저녁 19시',
+  '20:00': '저녁 20시',
+  '21:00': '저녁 21시',
+  '22:00': '저녁 22시',
+};
+
 export interface UseWeekViewProps {
   initialDate?: Date;
   minuteStep?: number;
@@ -72,6 +93,7 @@ export const useWeekView = ({
     shortName: format(day, 'EEE', { locale }),
     disabled: disabledDay ? disabledDay(day) : false,
     isWeekend: isWeekend(day),
+    // skip for 03 ~ 04, 13 ~ 18
     cells: eachMinuteOfInterval(
       {
         start: startOfDay(day),
@@ -80,13 +102,14 @@ export const useWeekView = ({
       {
         step: minuteStep,
       },
-    ).map((hour) => ({
-      date: hour,
-      hour: format(hour, 'HH', { locale }),
-      minute: format(hour, 'mm', { locale }),
-      hourAndMinute: format(hour, 'HH:mm', { locale }),
-      disabled: disabledCell ? disabledCell(hour) : false,
-    })),
+    )
+      // CONVERT_TIME에 들어가지 않는 key는 제외하고 map
+      .filter((date) => CONVERT_TIME[format(date, 'HH:mm')])
+      .map((date) => ({
+        date,
+        hourAndMinute: CONVERT_TIME[format(date, 'HH:mm')],
+        disabled: disabledCell ? disabledCell(date) : false,
+      })),
   }));
 
   useEffect(() => {
