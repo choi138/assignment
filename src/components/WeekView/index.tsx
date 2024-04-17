@@ -17,7 +17,7 @@ export const WeekView: React.FC = () => {
       <div className="flex flex-col flex-1 overflow-hidden select-none">
         <div className="flex flex-col flex-1 isolate overflow-auto">
           <div className="flex flex-col flex-none min-w-[700px]">
-            <DaysHeader days={days} />
+            {/* <DaysHeader days={days} /> */}
             <div className="grid grid-cols-1 grid-rows-1">
               <div className="row-start-1 col-start-1">
                 <Grid days={days} rowHeight={100} />

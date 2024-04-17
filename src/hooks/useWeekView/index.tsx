@@ -93,7 +93,6 @@ export const useWeekView = ({
     shortName: format(day, 'EEE', { locale }),
     disabled: disabledDay ? disabledDay(day) : false,
     isWeekend: isWeekend(day),
-    // skip for 03 ~ 04, 13 ~ 18
     cells: eachMinuteOfInterval(
       {
         start: startOfDay(day),
@@ -103,7 +102,6 @@ export const useWeekView = ({
         step: minuteStep,
       },
     )
-      // CONVERT_TIME에 들어가지 않는 key는 제외하고 map
       .filter((date) => CONVERT_TIME[format(date, 'HH:mm')])
       .map((date) => ({
         date,
