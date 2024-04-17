@@ -8,8 +8,7 @@ import { endOfWeek, format, lastDayOfWeek, startOfWeek } from 'date-fns';
 
 import { startOfTheWeekStore } from 'src/store/startOfTheWeekStore';
 import { RootState } from 'src/store';
-
-import { calendarCss } from './style';
+import './styles.css';
 
 export const Calendar: React.FC = () => {
   const selectedWeekDay = useSelector((state: RootState) => state.startOfTheWeekStore);
@@ -21,7 +20,7 @@ export const Calendar: React.FC = () => {
   const [selectedWeekRange, setSelectedWeekRange] = useState<DateRange | undefined>(undefined);
   const [weekEndDays, setWeekEndDays] = useState({
     startDay: startOfWeek(selectedWeekDay),
-    lastDay: endOfWeek(today),
+    lastDay: endOfWeek(selectedWeekDay),
   });
 
   const formatCaption: DateFormatter = (month) => {
@@ -48,7 +47,6 @@ export const Calendar: React.FC = () => {
 
   return (
     <>
-      <style>{calendarCss}</style>
       <DayPicker
         mode="single"
         required

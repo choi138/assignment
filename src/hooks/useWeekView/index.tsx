@@ -10,6 +10,7 @@ import {
   endOfDay,
   format,
   isToday,
+  isWeekend,
   startOfDay,
   startOfWeek,
 } from 'date-fns';
@@ -66,9 +67,11 @@ export const useWeekView = ({
   }).map((day) => ({
     date: day,
     isToday: isToday(day),
+    dayOfMonthWithZero: format(day, 'd', { locale }),
     name: format(day, 'EEEE', { locale }),
     shortName: format(day, 'EEE', { locale }),
     disabled: disabledDay ? disabledDay(day) : false,
+    isWeekend: isWeekend(day),
     cells: eachMinuteOfInterval(
       {
         start: startOfDay(day),
