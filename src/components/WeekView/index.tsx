@@ -27,7 +27,7 @@ export const WeekView: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col  w-full">
+    <div className="flex flex-col py-8 w-full">
       <WeekViewHeader goToToday={goToToday} nextWeek={nextWeek} previousWeek={previousWeek} />
       <Grid
         days={days}

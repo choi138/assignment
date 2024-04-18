@@ -8,7 +8,7 @@
     @apply justify-center items-center;
   }
 
-  .borderCard {
+  .border-card {
     @apply flex items-center gap-3 text-primary text-sm font-medium border px-4 rounded-xl border-primary  h-6;
     @apply hover:bg-primary hover:text-white ease-in-out duration-300;
   }
@@ -17,7 +17,7 @@
     color: white;
   }
 
-  .selector {
+  .selector-box {
     caret-color: auto;
     appearance: none;
     outline: none;
@@ -25,5 +25,14 @@
     background-repeat: no-repeat;
     background-position: right 0.7rem top 50%;
     background-size: 1rem auto;
+    @apply w-full p-[0.4rem] rounded-md border-2 border-[#E0E6F1];
+  }
+
+  .tutor-box {
+    @apply border-b-2;
+  }
+
+  .tutor-inner-box {
+    @apply p-4;
   }
 }

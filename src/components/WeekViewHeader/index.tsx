@@ -12,13 +12,13 @@ export interface WeekViewHeaderProps {
 export const WeekViewHeader: React.FC<WeekViewHeaderProps> = ({ goToToday, nextWeek, previousWeek }) => {
   return (
     <header className="flex items-center justify-start gap-x-3 select-none">
-      <h1 className="borderCard" onClick={goToToday}>
+      <h1 className="border-card" onClick={goToToday}>
         오늘
       </h1>
-      <h1 className="borderCard" onClick={previousWeek}>
+      <h1 className="border-card" onClick={previousWeek}>
         <FontAwesomeIcon icon={faChevronLeft} />
       </h1>
-      <h1 className="borderCard" onClick={nextWeek}>
+      <h1 className="border-card" onClick={nextWeek}>
         <FontAwesomeIcon icon={faChevronRight} />
       </h1>
     </header>

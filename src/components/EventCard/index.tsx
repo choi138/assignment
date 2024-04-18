@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { RootState } from 'src/store';
+import { RootState, classDayStore } from 'src/store';
 
 export type Event = {
   id: string;
@@ -20,7 +20,28 @@ export interface EventCardProps {
 
 export const EventCard: React.FC<EventCardProps> = ({ closed, startDate }) => {
   const { duration } = useSelector(({ selectTicketDurationStore }: RootState) => selectTicketDurationStore);
+  const dispatch = useDispatch();
+
   const isOverHalfHour = startDate.getMinutes() >= 29;
+
+  const formatDate = () => {
+    const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+
+    const month = startDate.getMonth() + 1;
+    const day = startDate.getDate();
+    const weekday = weekdays[startDate.getDay()];
+    const hours = startDate.getHours();
+    console.log('hours', hours);
+    const amOrPm = hours === 0 ? '자정' : hours < 12 ? '오전' : '오후';
+    const formattedHours = hours % 12 || '00';
+    const minutes = String(startDate.getMinutes()).padStart(2, '0');
+    return `${month}월 ${day}일(${weekday}) ${amOrPm} ${formattedHours}:${minutes}`;
+  };
+
+  const onClick = () => {
+    const formattedDate = formatDate();
+    dispatch(classDayStore.actions.setDuration(formattedDate));
+  };
 
   if (duration === 40) {
     return (
@@ -29,6 +50,7 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate }) => {
         style={{
           boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -3px rgb(0 0 0 / 0.1)',
         }}
+        onClick={onClick}
       >
         <FontAwesomeIcon icon={faUser} />
         <h1 className="text-placeHolder text-base max-xl:text-xs ">튜터 선택</h1>
@@ -42,6 +64,7 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate }) => {
           top: isOverHalfHour ? '50%' : 0,
           bottom: isOverHalfHour ? 0 : '50%',
         }}
+        onClick={onClick}
       >
         {closed ? (
           <div className=" relative z-10 w-full flex center gap-x-2 h-full bg-[#E6EBF2]">

@@ -14,9 +14,7 @@ import { selectTicketDurationStore } from 'src/store';
 
 export const Calendar: React.FC = () => {
   const selectedWeekDay = useSelector((state: RootState) => state.startOfTheWeekStore);
-  const selectWeekDayDispatch = useDispatch();
-
-  const ticketDurationDispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const today = new Date();
 
@@ -35,13 +33,13 @@ export const Calendar: React.FC = () => {
     if (!day) return;
     const startOfWeekDate = startOfWeek(day);
     const endOfWeekDate = endOfWeek(day);
-    selectWeekDayDispatch(startOfTheWeekStore.actions.setDate(startOfWeekDate.toISOString()));
+    dispatch(startOfTheWeekStore.actions.setDate(startOfWeekDate.toISOString()));
     setWeekEndDays({ startDay: startOfWeekDate, lastDay: endOfWeekDate });
     setSelectedWeekRange({ from: startOfWeekDate, to: endOfWeekDate });
   };
 
   const onOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    ticketDurationDispatch(selectTicketDurationStore.actions.setDuration(Number(e.target.value)));
+    dispatch(selectTicketDurationStore.actions.setDuration(Number(e.target.value)));
   };
 
   useEffect(() => {
@@ -55,7 +53,7 @@ export const Calendar: React.FC = () => {
 
   return (
     <div
-      className="flex flex-col gap-y-10 sticky"
+      className="flex flex-col gap-y-10 sticky h-fit py-8"
       style={{
         position: 'sticky',
         top: '0',
@@ -63,11 +61,7 @@ export const Calendar: React.FC = () => {
         backgroundColor: 'white',
       }}
     >
-      <select
-        title="ticket selector"
-        className="selector w-full p-[0.4rem] rounded-md border-2 border-[#E0E6F1]"
-        onChange={onOptionChange}
-      >
+      <select title="ticket selector" className="selector-box" onChange={onOptionChange}>
         <option value="20">
           20분 수업권 (
           {TICKETS.filter(({ status, duration }) => duration === 20 && status === TICKET_STATUS.UNUSED).length}회 남음)

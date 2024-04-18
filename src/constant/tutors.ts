@@ -13,6 +13,7 @@ export interface TutorInterface {
   tags?: string[];
   recommend?: boolean;
   marked?: boolean;
+  accent: string;
 }
 
 export const TUTORS: TutorInterface[] = [
@@ -27,6 +28,7 @@ export const TUTORS: TutorInterface[] = [
       number: 9,
     },
     marked: true,
+    accent: 'British',
   },
   {
     name: 'Bao',
@@ -40,6 +42,7 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['University'],
     recommend: true,
+    accent: 'American',
   },
   {
     name: 'Aadhya',
@@ -53,6 +56,7 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['Tutor'],
     marked: true,
+    accent: 'American',
   },
   {
     name: 'Sophia',
@@ -66,6 +70,7 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['STEM'],
     recommend: true,
+    accent: 'American',
   },
   {
     name: 'Elijah',
@@ -78,6 +83,7 @@ export const TUTORS: TutorInterface[] = [
       number: 10,
     },
     tags: ['Science'],
+    accent: 'American',
   },
   {
     name: 'Ava',
@@ -91,6 +97,7 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['STEM', 'Tutor'],
     recommend: true,
+    accent: 'australian',
   },
   {
     name: 'Mason',
@@ -103,6 +110,7 @@ export const TUTORS: TutorInterface[] = [
       number: 12,
     },
     tags: ['Psychology'],
+    accent: 'australian',
   },
   {
     name: 'Luna',
@@ -116,6 +124,7 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['Literature', 'Tutor'],
     marked: true,
+    accent: 'canadian',
   },
   {
     name: 'Liam',
@@ -128,6 +137,7 @@ export const TUTORS: TutorInterface[] = [
       number: 10,
     },
     tags: ['STEM'],
+    accent: 'canadian',
   },
   {
     name: 'Olivia',
@@ -141,5 +151,6 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['History', 'Tutor'],
     marked: true,
+    accent: 'canadian',
   },
 ];
