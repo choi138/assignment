@@ -5,7 +5,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { getMinutes, getUnixTime, isSameDay } from 'date-fns';
 
 import { Cell, Days } from 'src/hooks';
-import { ScheduleDataItems, ScheduleItems } from 'src/constant/schedule';
+import { ScheduleDataItems } from 'src/constant/schedule';
 
 import { EventCard } from '../EventCard';
 
@@ -29,11 +29,10 @@ const TimeCell: React.FC<{ cell: Cell; cellIndex: number }> = ({ cell, cellIndex
 export interface GridProps {
   days: Days;
   rowHeight: number;
-  onCellClick?: (cell: Cell) => void;
   scheduleData?: ScheduleDataItems[];
 }
 
-export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, scheduleData: schedules }) => {
+export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: schedules }) => {
   return (
     <div className="flex w-full justify-between">
       <div
@@ -99,7 +98,6 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, schedu
                     gridColumnStart: dayIndex + 1,
                     gridColumnEnd: dayIndex + 2,
                   }}
-                  onClick={() => onCellClick?.(cell)}
                 >
                   <div
                     style={{
@@ -120,12 +118,9 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, schedu
                         return sameDay && isSameTime;
                       })
                       .map(({ closed, startDate }, scheduleIndex) => {
-                        const isOverHalfHour = startDate.getMinutes() >= 29;
-                        const pastDay = startDate < new Date();
+                        const isPastTime = cell.disabled;
 
-                        return (
-                          !pastDay && <EventCard key={scheduleIndex} closed={closed} isOverHalfHour={isOverHalfHour} />
-                        );
+                        return !isPastTime && <EventCard key={scheduleIndex} closed={closed} startDate={startDate} />;
                       }),
                   )}
                 </button>
