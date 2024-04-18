@@ -80,6 +80,7 @@ export const useWeekView = ({
 
   const goToToday = () => {
     setStartOfTheWeek(startOfWeek(startOfDay(new Date()), { weekStartsOn }));
+    dispatch({ type: 'dateStore/setDate', payload: new Date() });
   };
 
   const days = eachDayOfInterval({

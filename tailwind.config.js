@@ -13,8 +13,11 @@ export default {
         weekend: {
           DEFAULT: '#E74555',
         },
-        gray: {
+        disabled: {
           DEFAULT: '#ECF0F5',
+        },
+        border: {
+          DEFAULT: '#E2E7EB',
         },
       },
     },
