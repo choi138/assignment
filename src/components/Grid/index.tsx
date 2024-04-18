@@ -2,9 +2,12 @@ import React, { ReactNode } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { getMinutes, getUnixTime } from 'date-fns';
+import { getMinutes, getUnixTime, isSameDay, isSameWeek } from 'date-fns';
 
 import { Cell, Days } from 'src/hooks';
+import { ScheduleItems } from 'src/constant/schedule';
+
+import { EventCard } from '../EventCard';
 
 const TimeCell: React.FC<{ cell: Cell; cellIndex: number }> = ({ cell, cellIndex }) => (
   <div
@@ -27,10 +30,10 @@ export interface GridProps {
   days: Days;
   rowHeight: number;
   onCellClick?: (cell: Cell) => void;
-  CellContent?: React.ReactNode;
+  schedules?: ScheduleItems[];
 }
 
-export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, CellContent }) => {
+export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, schedules }) => {
   return (
     <div className="flex w-full justify-between">
       <div
@@ -95,7 +98,6 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, CellCo
                     gridRowEnd: cellIndex + 2,
                     gridColumnStart: dayIndex + 1,
                     gridColumnEnd: dayIndex + 2,
-                    // height의 2/1 지점에 border를 넣어서 시간을 표시
                   }}
                   onClick={() => onCellClick?.(cell)}
                 >
@@ -106,28 +108,21 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, CellCo
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderTop: disableSelectedTime ? '0px' : '1px solid #E2E7EB',
+                      height: '100%',
+                      borderTop: '1px dashed #E2E7EB',
                     }}
-                  >
-                    {CellContent && CellContent}
-                  </div>
-                  {/* <div
-                    style={{
-                      position: 'absolute',
-                      bottom: '50%',
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {CellContent && CellContent}
-                  </div> */}
+                  />
+                  {(schedules || [])
+                    .filter(({ startDate }) => {
+                      const isSameDay = startDate.getDate() === cell.date.getDate();
+                      const isSameTime = startDate.getHours() === cell.date.getHours();
+                      return isSameDay && isSameTime;
+                    })
+                    .map(({ closed, startDate }, scheduleIndex) => {
+                      const isOverHalfHour = startDate.getMinutes() >= 29;
+
+                      return <EventCard key={scheduleIndex} closed={closed} isOverHalfHour={isOverHalfHour} />;
+                    })}
                 </button>
               );
             }),

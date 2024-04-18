@@ -4,6 +4,7 @@ import { ko } from 'date-fns/locale';
 import { isBefore, setHours, setMinutes, startOfWeek } from 'date-fns';
 
 import { useWeekView } from 'src/hooks';
+import { SCHEDULES } from 'src/constant/schedule';
 
 import { WeekViewHeader } from '../WeekViewHeader';
 import { Grid } from '../Grid';
@@ -28,7 +29,7 @@ export const WeekView: React.FC = () => {
           <div className="flex flex-col flex-none min-w-[700px]">
             <div className="grid grid-cols-1 grid-rows-1">
               <div className="row-start-1 col-start-1">
-                <Grid days={days} rowHeight={6} CellContent={<EventCard closed={false} />} />
+                <Grid days={days} rowHeight={6} schedules={SCHEDULES} />
               </div>
               {/* <div className="row-start-1 col-start-1 w-11/12" style={{ border: '1px solid red', justifySelf: 'end' }}>
                 <EventCard
