@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { getMinutes, getUnixTime, isSameDay, isSameWeek } from 'date-fns';
+import { getMinutes, getUnixTime, isSameDay } from 'date-fns';
 
 import { Cell, Days } from 'src/hooks';
-import { ScheduleItems } from 'src/constant/schedule';
+import { ScheduleDataItems, ScheduleItems } from 'src/constant/schedule';
 
 import { EventCard } from '../EventCard';
 
@@ -30,10 +30,10 @@ export interface GridProps {
   days: Days;
   rowHeight: number;
   onCellClick?: (cell: Cell) => void;
-  schedules?: ScheduleItems[];
+  scheduleData?: ScheduleDataItems[];
 }
 
-export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, schedules }) => {
+export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, scheduleData: schedules }) => {
   return (
     <div className="flex w-full justify-between">
       <div
@@ -112,17 +112,22 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, onCellClick, schedu
                       borderTop: '1px dashed #E2E7EB',
                     }}
                   />
-                  {(schedules || [])
-                    .filter(({ startDate }) => {
-                      const isSameDay = startDate.getDate() === cell.date.getDate();
-                      const isSameTime = startDate.getHours() === cell.date.getHours();
-                      return isSameDay && isSameTime;
-                    })
-                    .map(({ closed, startDate }, scheduleIndex) => {
-                      const isOverHalfHour = startDate.getMinutes() >= 29;
+                  {(schedules || []).map(({ schedules }) =>
+                    schedules
+                      .filter(({ startDate }) => {
+                        const sameDay = isSameDay(startDate, cell.date);
+                        const isSameTime = startDate.getHours() === cell.date.getHours();
+                        return sameDay && isSameTime;
+                      })
+                      .map(({ closed, startDate }, scheduleIndex) => {
+                        const isOverHalfHour = startDate.getMinutes() >= 29;
+                        const pastDay = startDate < new Date();
 
-                      return <EventCard key={scheduleIndex} closed={closed} isOverHalfHour={isOverHalfHour} />;
-                    })}
+                        return (
+                          !pastDay && <EventCard key={scheduleIndex} closed={closed} isOverHalfHour={isOverHalfHour} />
+                        );
+                      }),
+                  )}
                 </button>
               );
             }),

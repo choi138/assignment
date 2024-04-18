@@ -7,12 +7,16 @@ import { ko } from 'date-fns/locale';
 import { endOfWeek, format, lastDayOfWeek, startOfWeek } from 'date-fns';
 
 import { startOfTheWeekStore } from 'src/store/startOfTheWeekStore';
-import { RootState } from 'src/store';
+import { RootState } from 'src/store/store';
 import './styles.css';
+import { TICKETS, TICKET_STATUS } from 'src/constant';
+import { selectTicketDurationStore } from 'src/store';
 
 export const Calendar: React.FC = () => {
   const selectedWeekDay = useSelector((state: RootState) => state.startOfTheWeekStore);
-  const dispatch = useDispatch();
+  const selectWeekDayDispatch = useDispatch();
+
+  const ticketDurationDispatch = useDispatch();
 
   const today = new Date();
 
@@ -31,9 +35,13 @@ export const Calendar: React.FC = () => {
     if (!day) return;
     const startOfWeekDate = startOfWeek(day);
     const endOfWeekDate = endOfWeek(day);
-    dispatch(startOfTheWeekStore.actions.setDate(startOfWeekDate.toISOString()));
+    selectWeekDayDispatch(startOfTheWeekStore.actions.setDate(startOfWeekDate.toISOString()));
     setWeekEndDays({ startDay: startOfWeekDate, lastDay: endOfWeekDate });
     setSelectedWeekRange({ from: startOfWeekDate, to: endOfWeekDate });
+  };
+
+  const onOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    ticketDurationDispatch(selectTicketDurationStore.actions.setDuration(Number(e.target.value)));
   };
 
   useEffect(() => {
@@ -46,7 +54,29 @@ export const Calendar: React.FC = () => {
   }, [weekEndDays]);
 
   return (
-    <>
+    <div
+      className="flex flex-col gap-y-10 sticky"
+      style={{
+        position: 'sticky',
+        top: '0',
+        zIndex: 100,
+        backgroundColor: 'white',
+      }}
+    >
+      <select
+        title="ticket selector"
+        className="selector w-full p-[0.4rem] rounded-md border-2 border-[#E0E6F1]"
+        onChange={onOptionChange}
+      >
+        <option value="20">
+          20분 수업권 (
+          {TICKETS.filter(({ status, duration }) => duration === 20 && status === TICKET_STATUS.UNUSED).length}회 남음)
+        </option>
+        <option value="40">
+          40분 수업권 (
+          {TICKETS.filter(({ status, duration }) => duration === 40 && status === TICKET_STATUS.UNUSED).length}회 남음)
+        </option>
+      </select>
       <DayPicker
         mode="single"
         required
@@ -70,6 +100,6 @@ export const Calendar: React.FC = () => {
         formatters={{ formatCaption }}
         locale={ko}
       />
-    </>
+    </div>
   );
 };

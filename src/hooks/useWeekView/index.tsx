@@ -15,7 +15,7 @@ import {
   startOfWeek,
 } from 'date-fns';
 
-import { RootState } from 'src/store';
+import { RootState } from 'src/store/store';
 
 const CONVERT_TIME: { [key: string]: string } = {
   '00:00': '자정 0시',

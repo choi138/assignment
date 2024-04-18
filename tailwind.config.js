@@ -19,6 +19,9 @@ export default {
         border: {
           DEFAULT: '#E2E7EB',
         },
+        placeHolder: {
+          DEFAULT: '#9A9A9A',
+        },
       },
     },
   },

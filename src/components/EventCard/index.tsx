@@ -18,15 +18,10 @@ export interface EventCardProps {
 export const EventCard: React.FC<EventCardProps> = ({ closed, isOverHalfHour }) => {
   return (
     <div
+      className="absolute flex center left-0 right-0"
       style={{
-        position: 'absolute',
         top: isOverHalfHour ? '50%' : 0,
-        left: 0,
-        right: 0,
         bottom: isOverHalfHour ? 0 : '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
       }}
     >
       {closed ? (
@@ -35,13 +30,13 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, isOverHalfHour }) 
         </div>
       ) : (
         <div
-          className=" w-11/12 relative z-10  flex center border-2 border-primary rounded-xl gap-x-2 py-1 px-1"
+          className="hover-parent w-11/12 relative z-10  flex center border-2 border-primary rounded-xl gap-x-2 py-1 px-1 hover:bg-primary hover:text-white transition-all duration-150 ease-in-out"
           style={{
             boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -3px rgb(0 0 0 / 0.1)',
           }}
         >
           <FontAwesomeIcon icon={faUser} />
-          <h1 className="text-[#9A9A9A] text-base max-xl:text-xs">튜터 선택</h1>
+          <h1 className="text-placeHolder text-base max-xl:text-xs ">튜터 선택</h1>
         </div>
       )}
     </div>
