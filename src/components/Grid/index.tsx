@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -33,6 +33,8 @@ export interface GridProps {
 }
 
 export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: schedules }) => {
+  const [selectedTime, setSelectedTime] = useState<Date | null>(null);
+
   return (
     <div className="flex w-full justify-between">
       <div
@@ -120,7 +122,17 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: sched
                       .map(({ closed, startDate }, scheduleIndex) => {
                         const isPastTime = cell.disabled;
 
-                        return !isPastTime && <EventCard key={scheduleIndex} closed={closed} startDate={startDate} />;
+                        return (
+                          !isPastTime && (
+                            <EventCard
+                              key={scheduleIndex}
+                              closed={closed}
+                              startDate={startDate}
+                              selectedTime={selectedTime}
+                              setSelectedTime={setSelectedTime}
+                            />
+                          )
+                        );
                       }),
                   )}
                 </button>

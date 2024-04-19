@@ -13,8 +13,8 @@
     @apply hover:bg-primary hover:text-white ease-in-out duration-300;
   }
 
-  .hover-parent:hover > h1 {
-    color: white;
+  .day-box {
+    @apply w-11/12 relative z-10 h-full flex center border-2 border-primary rounded-xl gap-x-2 py-1 px-1  transition-all duration-150 ease-in-out;
   }
 
   .selector-box {
@@ -29,7 +29,7 @@
   }
 
   .tutor-box {
-    @apply border-b-2;
+    @apply border-b-[1.5px];
   }
 
   .tutor-inner-box {

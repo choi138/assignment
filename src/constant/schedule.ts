@@ -16,8 +16,8 @@ export const SCHEDULES_DATA: ScheduleDataItems[] = [
     duration: 20,
     schedules: [
       {
-        startDate: setMinutes(setHours(new Date('2024-04-19'), 21), 0),
-        endDate: setMinutes(setHours(new Date('2024-04-19'), 21), 30),
+        startDate: setMinutes(setHours(new Date('2024-04-19'), 11), 0),
+        endDate: setMinutes(setHours(new Date('2024-04-19'), 11), 30),
         closed: false,
       },
       {

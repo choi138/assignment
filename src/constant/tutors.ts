@@ -1,3 +1,5 @@
+import { setHours, setMinutes } from 'date-fns';
+
 import { ProfileJPEG } from 'src/assets';
 
 export interface TutorInterface {
@@ -12,12 +14,19 @@ export interface TutorInterface {
   };
   tags?: string[];
   type?: {
-    available?: boolean;
     recommend?: boolean;
     marked?: boolean;
   };
+  startTime: Date;
+  endTime: Date;
   accent: string;
 }
+
+const FIRST_AVAILABLE_START_TIME = setMinutes(setHours(new Date('2024-04-19'), 11), 0);
+const FIRST_AVAILABLE_END_TIME = setMinutes(setHours(new Date('2024-04-19'), 11), 30);
+
+const SECOND_AVAILABLE_START_TIME = setMinutes(setHours(new Date('2024-04-20'), 0), 0);
+const SECOND_AVAILABLE_END_TIME = setMinutes(setHours(new Date('2024-04-20'), 1), 0);
 
 export const TUTORS: TutorInterface[] = [
   {
@@ -31,9 +40,10 @@ export const TUTORS: TutorInterface[] = [
       number: 9,
     },
     type: {
-      available: true,
       marked: true,
     },
+    startTime: FIRST_AVAILABLE_START_TIME,
+    endTime: FIRST_AVAILABLE_END_TIME,
     accent: 'British',
   },
   {
@@ -49,8 +59,9 @@ export const TUTORS: TutorInterface[] = [
     tags: ['University'],
     type: {
       recommend: true,
-      available: true,
     },
+    startTime: FIRST_AVAILABLE_START_TIME,
+    endTime: FIRST_AVAILABLE_END_TIME,
     accent: 'American',
   },
   {
@@ -65,9 +76,10 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['Tutor'],
     type: {
-      available: true,
       marked: true,
     },
+    startTime: FIRST_AVAILABLE_START_TIME,
+    endTime: FIRST_AVAILABLE_END_TIME,
     accent: 'American',
   },
   {
@@ -84,6 +96,8 @@ export const TUTORS: TutorInterface[] = [
     type: {
       recommend: true,
     },
+    startTime: FIRST_AVAILABLE_START_TIME,
+    endTime: FIRST_AVAILABLE_END_TIME,
     accent: 'American',
   },
   {
@@ -96,6 +110,8 @@ export const TUTORS: TutorInterface[] = [
       duration: 20,
       number: 10,
     },
+    startTime: SECOND_AVAILABLE_START_TIME,
+    endTime: SECOND_AVAILABLE_END_TIME,
     tags: ['Science'],
     accent: 'American',
   },
@@ -113,6 +129,8 @@ export const TUTORS: TutorInterface[] = [
     type: {
       recommend: true,
     },
+    startTime: SECOND_AVAILABLE_START_TIME,
+    endTime: SECOND_AVAILABLE_END_TIME,
     accent: 'australian',
   },
   {
@@ -125,6 +143,8 @@ export const TUTORS: TutorInterface[] = [
       duration: 40,
       number: 12,
     },
+    startTime: SECOND_AVAILABLE_START_TIME,
+    endTime: SECOND_AVAILABLE_END_TIME,
     tags: ['Psychology'],
     accent: 'australian',
   },
@@ -140,9 +160,10 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['Literature', 'Tutor'],
     type: {
-      available: true,
       marked: true,
     },
+    startTime: SECOND_AVAILABLE_START_TIME,
+    endTime: SECOND_AVAILABLE_END_TIME,
     accent: 'canadian',
   },
   {
@@ -155,9 +176,8 @@ export const TUTORS: TutorInterface[] = [
       duration: 40,
       number: 10,
     },
-    type: {
-      available: true,
-    },
+    startTime: SECOND_AVAILABLE_START_TIME,
+    endTime: SECOND_AVAILABLE_END_TIME,
     tags: ['STEM'],
     accent: 'canadian',
   },
@@ -173,9 +193,10 @@ export const TUTORS: TutorInterface[] = [
     },
     tags: ['History', 'Tutor'],
     type: {
-      available: true,
       marked: true,
     },
+    startTime: FIRST_AVAILABLE_START_TIME,
+    endTime: FIRST_AVAILABLE_END_TIME,
     accent: 'canadian',
   },
 ];
