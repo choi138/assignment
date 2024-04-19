@@ -221,7 +221,7 @@ export const TUTORS: TutorInterface[] = [
     startTime: FOURTH_AVAILABLE_START_TIME,
     endTime: FOURTH_AVAILABLE_END_TIME,
     tags: ['STEM'],
-    accent: 'american',
+    accent: 'American',
   },
   {
     name: 'Ethan',
@@ -236,7 +236,7 @@ export const TUTORS: TutorInterface[] = [
     startTime: FOURTH_AVAILABLE_START_TIME,
     endTime: FOURTH_AVAILABLE_END_TIME,
     tags: ['STEM'],
-    accent: 'american',
+    accent: 'American',
   },
   {
     name: 'Sophia',
@@ -251,6 +251,6 @@ export const TUTORS: TutorInterface[] = [
     startTime: FOURTH_AVAILABLE_START_TIME,
     endTime: FOURTH_AVAILABLE_END_TIME,
     tags: ['STEM'],
-    accent: 'american',
+    accent: 'American',
   },
 ];

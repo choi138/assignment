@@ -11,11 +11,14 @@ export const TutorBar: React.FC = () => {
   const dispatch = useDispatch();
   const { classDay } = useSelector(({ classDayStore }: RootState) => classDayStore);
   const { duration } = useSelector(({ selectTicketDurationStore }: RootState) => selectTicketDurationStore);
-  const [selectedMenu, setSelectedMenu] = useState(TUTOR_MENUS.map(({ type }) => type === 'available'));
   const { tutor } = useSelector(({ selectedTutorStore }: RootState) => selectedTutorStore);
 
-  const onPressCategory = (index: number) => {
-    setSelectedMenu((prev) => prev.map((_, i) => (i === index ? true : false)));
+  const [selectedMenu, setSelectedMenu] = useState<TutorMenuItems['type']>('available');
+  const [tutorOption, setTutorOption] = useState<string>('');
+  const [tutorMajor, setTutorMajor] = useState<string>('');
+
+  const onPressCategory = (type: TutorMenuItems['type']) => {
+    setSelectedMenu(type);
   };
 
   const formatDate = () => {
@@ -32,9 +35,21 @@ export const TutorBar: React.FC = () => {
     return `${month}월 ${day}일(${weekday}) ${amOrPm} ${formattedHours}:${minutes}`;
   };
 
+  const onSelectOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setTutorOption(value);
+  };
+
+  const onSelectMajorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setTutorMajor(value);
+  };
+
   const filterTutorOption = (option: 'accent' | 'major') => {
     return TUTORS.filter(
-      (tutor, index, tutorList) => tutorList.findIndex((t) => t[option] === tutor[option]) === index,
+      (tutor, index, tutorList) =>
+        availableTime(tutor.startTime, tutor.endTime) &&
+        tutorList.findIndex((t) => t[option] === tutor[option]) === index,
     );
   };
 
@@ -81,15 +96,15 @@ export const TutorBar: React.FC = () => {
                     <option value="male">남자</option>
                     <option value="feMale">여자</option>
                   </select>
-                  <select title="accent" className="selector-box ">
-                    <option value="accent">억양</option>
+                  <select title="accent" className="selector-box" onChange={onSelectOptionChange}>
+                    <option value="">억양</option>
                     {filterTutorOption('accent').map((tutor, index) => (
                       <option key={index} value={tutor.accent}>
                         {tutor.accent}
                       </option>
                     ))}
                   </select>
-                  <select title="major" className="selector-box ">
+                  <select title="major" className="selector-box " onChange={onSelectMajorChange}>
                     <option value="major">전공</option>
                     {filterTutorOption('major').map((tutor, index) => (
                       <option key={index} value={tutor.major}>
@@ -104,16 +119,16 @@ export const TutorBar: React.FC = () => {
                       key={index}
                       className="w-full flex items-center justify-center text-sm transition-all duration-200 ease-in-out"
                       style={{
-                        backgroundColor: selectedMenu[index] ? '#f5f5f5' : 'white',
-                        borderBottom: selectedMenu[index] ? '1.5px solid #8575e4' : '1.5px solid #E2E7EB',
+                        backgroundColor: selectedMenu === type ? '#f5f5f5' : 'white',
+                        borderBottom: selectedMenu === type ? '1.5px solid #8575e4' : '1.5px solid #E2E7EB',
                         padding: '0.8rem 0.2rem',
                         cursor: 'pointer',
                       }}
-                      onClick={() => onPressCategory(index)}
+                      onClick={() => onPressCategory(type)}
                     >
                       <p
                         className="font-medium text-[0.9rem]"
-                        style={{ color: selectedMenu[index] ? '#8575e4' : '#000000' }}
+                        style={{ color: selectedMenu === type ? '#8575e4' : '#000000' }}
                       >
                         {name} ({filterTutorType(type).length})
                       </p>
@@ -127,8 +142,27 @@ export const TutorBar: React.FC = () => {
                 <p className=" text-[0.8rem] text-[#AAB4C6] font-medium">선택한 시간에 수업 가능한 튜터들입니다.</p>
               </div>
             </div>
-            {TUTORS.map((t, index) => (
-              <TutorBox key={index} {...t} onClick={() => onTutorClick(index)} selected={t === tutor} />
+            {TUTORS.filter((tutor) => {
+              const filterOption = tutorOption !== '' ? tutor.accent === tutorOption : true;
+              const filterMajor = tutorMajor !== '' ? tutor.major === tutorMajor : true;
+
+              switch (selectedMenu) {
+                case 'available':
+                  return (
+                    filterMajor &&
+                    filterOption &&
+                    availableTime(tutor.startTime, tutor.endTime) &&
+                    tutor.lesson.duration === duration
+                  );
+                case 'marked':
+                  return filterMajor && filterOption && tutor.type?.marked;
+                case 'recommend':
+                  return filterMajor && filterOption && tutor.type?.recommend;
+                default:
+                  return false;
+              }
+            }).map((t, index) => (
+              <TutorBox key={index} {...t} selected={t === tutor} onClick={() => onTutorClick(index)} />
             ))}
           </>
         ) : (
