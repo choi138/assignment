@@ -17,11 +17,6 @@ export const TutorFilterSection: React.FC<TutorFilterSectionProps> = ({
 }) => {
   const { classDay } = useSelector(({ classDayStore }: RootState) => classDayStore);
 
-  const availableTime = (startTime: Date, endTime: Date) => {
-    if (!classDay) return false;
-    return classDay <= endTime && classDay >= startTime;
-  };
-
   const onSelectOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setTutorAccent(value);
@@ -48,7 +43,7 @@ export const TutorFilterSection: React.FC<TutorFilterSectionProps> = ({
       <select title="gender" className="selector-box" onChange={onSelectGenderChange}>
         <option value="">성별</option>
         <option value="Male">남자</option>
-        <option value="FeMale">여자</option>
+        <option value="Female">여자</option>
       </select>
       <select title="accent" className="selector-box" onChange={onSelectOptionChange}>
         <option value="">억양</option>

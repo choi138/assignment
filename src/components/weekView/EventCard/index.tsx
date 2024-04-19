@@ -33,7 +33,6 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
   };
 
   const onClick = () => {
-    console.log('clicked', tutor);
     if (closed) return;
     if (tutor) {
       return open({
