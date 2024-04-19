@@ -21,6 +21,7 @@ export interface TutorInterface {
   startTime: Date;
   endTime: Date;
   accent: string;
+  gender: 'Male' | 'Female';
 }
 
 const today = new Date();
@@ -56,6 +57,7 @@ export const TUTORS: TutorInterface[] = [
     startTime: FIRST_AVAILABLE_START_TIME,
     endTime: FIRST_AVAILABLE_END_TIME,
     accent: 'British',
+    gender: 'Male',
   },
   {
     id: 2,
@@ -75,6 +77,7 @@ export const TUTORS: TutorInterface[] = [
     startTime: FIRST_AVAILABLE_START_TIME,
     endTime: FIRST_AVAILABLE_END_TIME,
     accent: 'American',
+    gender: 'Female',
   },
   {
     id: 3,
@@ -94,6 +97,7 @@ export const TUTORS: TutorInterface[] = [
     startTime: FIRST_AVAILABLE_START_TIME,
     endTime: FIRST_AVAILABLE_END_TIME,
     accent: 'American',
+    gender: 'Male',
   },
   {
     id: 4,
@@ -113,6 +117,7 @@ export const TUTORS: TutorInterface[] = [
     startTime: SECOND_AVAILABLE_START_TIME,
     endTime: SECOND_AVAILABLE_END_TIME,
     accent: 'American',
+    gender: 'Female',
   },
   {
     id: 5,
@@ -129,6 +134,7 @@ export const TUTORS: TutorInterface[] = [
     endTime: SECOND_AVAILABLE_END_TIME,
     tags: ['Science'],
     accent: 'American',
+    gender: 'Male',
   },
   {
     id: 6,
@@ -147,7 +153,8 @@ export const TUTORS: TutorInterface[] = [
     },
     startTime: THIRD_AVAILABLE_START_TIME,
     endTime: THIRD_AVAILABLE_END_TIME,
-    accent: 'australian',
+    accent: 'Australian',
+    gender: 'Female',
   },
   {
     id: 7,
@@ -163,7 +170,8 @@ export const TUTORS: TutorInterface[] = [
     startTime: THIRD_AVAILABLE_START_TIME,
     endTime: THIRD_AVAILABLE_END_TIME,
     tags: ['Psychology'],
-    accent: 'australian',
+    accent: 'Australian',
+    gender: 'Male',
   },
   {
     id: 8,
@@ -182,7 +190,8 @@ export const TUTORS: TutorInterface[] = [
     },
     startTime: THIRD_AVAILABLE_START_TIME,
     endTime: THIRD_AVAILABLE_END_TIME,
-    accent: 'canadian',
+    accent: 'Canadian',
+    gender: 'Female',
   },
   {
     id: 9,
@@ -198,7 +207,8 @@ export const TUTORS: TutorInterface[] = [
     startTime: THIRD_AVAILABLE_START_TIME,
     endTime: THIRD_AVAILABLE_END_TIME,
     tags: ['STEM'],
-    accent: 'canadian',
+    accent: 'Canadian',
+    gender: 'Male',
   },
   {
     id: 10,
@@ -217,7 +227,8 @@ export const TUTORS: TutorInterface[] = [
     },
     startTime: FOURTH_AVAILABLE_START_TIME,
     endTime: FOURTH_AVAILABLE_END_TIME,
-    accent: 'canadian',
+    accent: 'Canadian',
+    gender: 'Female',
   },
   {
     id: 11,
@@ -234,6 +245,7 @@ export const TUTORS: TutorInterface[] = [
     endTime: FOURTH_AVAILABLE_END_TIME,
     tags: ['STEM'],
     accent: 'American',
+    gender: 'Male',
   },
   {
     id: 12,
@@ -250,6 +262,7 @@ export const TUTORS: TutorInterface[] = [
     endTime: FOURTH_AVAILABLE_END_TIME,
     tags: ['STEM'],
     accent: 'American',
+    gender: 'Female',
   },
   {
     id: 13,
@@ -266,5 +279,6 @@ export const TUTORS: TutorInterface[] = [
     endTime: FOURTH_AVAILABLE_END_TIME,
     tags: ['STEM'],
     accent: 'American',
+    gender: 'Male',
   },
 ];
