@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TutorInterface } from 'src/constant';
 
 export type TutorBoxProps = TutorInterface & {
-  selected?: boolean;
   onClick: () => void;
   selectAble: boolean;
 };
@@ -18,7 +17,6 @@ export const TutorBox: React.FC<TutorBoxProps> = ({
   major,
   acceptPercentage,
   lesson,
-  selected = false,
   selectAble = true,
   onClick,
 }) => {

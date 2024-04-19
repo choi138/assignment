@@ -96,7 +96,7 @@ export const Calendar: React.FC = () => {
         styles={{
           head_cell: {
             fontSize: '0.8rem',
-            color: '#afafaf',
+            color: '#868E8E',
             fontWeight: 400,
           },
           cell: {

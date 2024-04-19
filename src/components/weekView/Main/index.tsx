@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { ko } from 'date-fns/locale';
-import { isBefore, startOfWeek } from 'date-fns';
+import { isBefore } from 'date-fns';
 
 import { useWeekView } from 'src/hooks';
 import { SCHEDULES_DATA } from 'src/constant';
@@ -20,9 +20,6 @@ export const WeekView: React.FC = () => {
     locale: ko,
     disabledCell: (date) => {
       return isBefore(date, new Date());
-    },
-    disabledWeek: (startDayOfWeek) => {
-      return isBefore(startDayOfWeek, startOfWeek(new Date()));
     },
   });
 

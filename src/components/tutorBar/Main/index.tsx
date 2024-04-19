@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TUTOR_MENUS, TutorInterface, TutorMenuItems, TUTORS } from 'src/constant';
-import { classDayStore, RootState } from 'src/store';
+import { RootState } from 'src/store';
 import { selectedTutorStore } from 'src/store/tutorSelection';
 import { useCheckAvailableClassTime } from 'src/hooks';
 import { formatDate } from 'src/utils';
@@ -24,6 +24,7 @@ export const TutorBar: React.FC = () => {
   const [tutorMajor, setTutorMajor] = useState<string>('');
 
   const onTutorClick = (id: number) => {
+    if (selectedMenu !== 'available') return;
     const foundTutor = TUTORS.find((tutor) => tutor.id === id);
     if (foundTutor) {
       return dispatch(selectedTutorStore.actions.setTutor([...tutor, foundTutor]));
@@ -46,15 +47,6 @@ export const TutorBar: React.FC = () => {
       default:
         return false;
     }
-  };
-
-  const onRemoveTutor = () => {
-    const newTutor = tutor.filter((t) => t.startTime.toISOString() !== classDay?.toISOString());
-    dispatch(selectedTutorStore.actions.setTutor(newTutor));
-  };
-
-  const onResetClassDay = () => {
-    dispatch(classDayStore.actions.setDuration(null));
   };
 
   return (
@@ -89,7 +81,6 @@ export const TutorBar: React.FC = () => {
               <TutorBox
                 key={t.id}
                 {...t}
-                selected={tutor.find((selectedTutor) => selectedTutor.id === t.id) ? true : false}
                 onClick={() => onTutorClick(t.id)}
                 selectAble={selectedMenu === 'available'}
               />

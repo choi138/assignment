@@ -29,9 +29,11 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
   const onRemoveTutor = () => {
     const newTutor = selectorTutor.filter((t) => t.startTime.toISOString() !== startDate?.toISOString());
     dispatch(selectedTutorStore.actions.setTutor(newTutor));
+    close();
   };
 
   const onClick = () => {
+    console.log('clicked', tutor);
     if (closed) return;
     if (tutor) {
       return open({
@@ -77,7 +79,7 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
             <h1>예약 마감</h1>
           </div>
         ) : tutor ? (
-          <div className="day-box bg-primary">
+          <div className="day-box bg-primary" onClick={onClick}>
             <img src={tutor.profile} alt={tutor.name} className="w-[2rem] h-[2rem] rounded-full object-cover" />
             <p className="text-white text-base max-xl:text-xs font-bold">선택 완료</p>
           </div>
