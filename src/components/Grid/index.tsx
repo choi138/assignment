@@ -91,7 +91,7 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: sched
               return (
                 <button
                   key={getUnixTime(cell.date)}
-                  className={`relative ${!disableSelectedTime && 'border-r-2'} border-t-2  border-border cursor-pointer disabled:bg-disabled flex flex-col justify-between items-center `}
+                  className={`relative ${!disableSelectedTime && 'border-r-2'} border-t-2  border-border cursor-pointer disabled:bg-disabled flex flex-col center `}
                   disabled={cell.disabled || disableSelectedTime}
                   style={{
                     gridRowStart: cellIndex + 1,

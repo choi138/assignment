@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { TUTOR_MENUS, TutorMenuItems, TUTORS } from 'src/constant';
 import { RootState } from 'src/store';
+import { selectedTutorStore } from 'src/store/tutorSelection';
+
+import { TutorBox } from '../TutorBox';
 
 export const TutorBar: React.FC = () => {
+  const dispatch = useDispatch();
   const { classDay } = useSelector(({ classDayStore }: RootState) => classDayStore);
   const { duration } = useSelector(({ selectTicketDurationStore }: RootState) => selectTicketDurationStore);
-
   const [selectedMenu, setSelectedMenu] = useState(TUTOR_MENUS.map(({ type }) => type === 'available'));
+  const { tutor } = useSelector(({ selectedTutorStore }: RootState) => selectedTutorStore);
 
   const onPressCategory = (index: number) => {
     setSelectedMenu((prev) => prev.map((_, i) => (i === index ? true : false)));
@@ -54,8 +58,12 @@ export const TutorBar: React.FC = () => {
     }
   };
 
+  const onTutorClick = (index: number) => {
+    dispatch(selectedTutorStore.actions.setTutor(TUTORS[index]));
+  };
+
   return (
-    <div className="sticky top-0 h-screen w-[30rem] border-l-[1.5px] border-border" style={{}}>
+    <div className="sticky top-0 h-screen w-[35rem] border-l-[1.5px] border-border">
       <div className="h-full">
         {classDay ? (
           <>
@@ -98,12 +106,15 @@ export const TutorBar: React.FC = () => {
                       style={{
                         backgroundColor: selectedMenu[index] ? '#f5f5f5' : 'white',
                         borderBottom: selectedMenu[index] ? '1.5px solid #8575e4' : '1.5px solid #E2E7EB',
-                        padding: '0.4rem 0.2rem',
+                        padding: '0.8rem 0.2rem',
                         cursor: 'pointer',
                       }}
                       onClick={() => onPressCategory(index)}
                     >
-                      <p className="text-sm" style={{ color: selectedMenu[index] ? '#8575e4' : '#000000' }}>
+                      <p
+                        className="font-medium text-[0.9rem]"
+                        style={{ color: selectedMenu[index] ? '#8575e4' : '#000000' }}
+                      >
                         {name} ({filterTutorType(type).length})
                       </p>
                     </div>
@@ -112,13 +123,18 @@ export const TutorBar: React.FC = () => {
               </div>
             </div>
             <div className="tutor-box">
-              <div className="tutor-inner-box">
-                <p className=" text-sm text-[#AAB4C6]">선택한 시간에 수업 가능한 튜터들입니다.</p>
+              <div className="tutor-inner-box py-5">
+                <p className=" text-[0.8rem] text-[#AAB4C6] font-medium">선택한 시간에 수업 가능한 튜터들입니다.</p>
               </div>
             </div>
+            {TUTORS.map((t, index) => (
+              <TutorBox key={index} {...t} onClick={() => onTutorClick(index)} selected={t === tutor} />
+            ))}
           </>
         ) : (
-          <div className="h-full flex flex-col center text-[#b4bcc8]">아직 선택된 날짜가 없어요</div>
+          <div className="h-full flex flex-col center text-[#b4bcc8] font-medium text-[0.9rem]">
+            아직 선택된 날짜가 없어요
+          </div>
         )}
       </div>
     </div>

@@ -20,6 +20,7 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
   const isOverHalfHour = startDate.getMinutes() >= 29;
 
   const onClick = () => {
+    if (closed) return;
     setSelectedTime(startDate);
     dispatch(classDayStore.actions.setDuration(startDate));
   };
@@ -35,7 +36,7 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
           </div>
         ) : (
           <div
-            className="day-box"
+            className="day-box "
             style={{
               boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -3px rgb(0 0 0 / 0.1)',
               backgroundColor: selectedTime === startDate ? '#8575e4' : 'white',

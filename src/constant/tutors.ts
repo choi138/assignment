@@ -34,6 +34,9 @@ const SECOND_AVAILABLE_END_TIME = setMinutes(setHours(tomorrow, 1), 30);
 const THIRD_AVAILABLE_START_TIME = setMinutes(setHours(tomorrow, 5), 30);
 const THIRD_AVAILABLE_END_TIME = setMinutes(setHours(tomorrow, 6), 0);
 
+const FOURTH_AVAILABLE_START_TIME = setMinutes(setHours(tomorrow, 0), 0);
+const FOURTH_AVAILABLE_END_TIME = setMinutes(setHours(tomorrow, 0), 30);
+
 export const TUTORS: TutorInterface[] = [
   {
     name: 'Dominic',
@@ -201,8 +204,53 @@ export const TUTORS: TutorInterface[] = [
     type: {
       marked: true,
     },
-    startTime: THIRD_AVAILABLE_START_TIME,
-    endTime: THIRD_AVAILABLE_START_TIME,
+    startTime: FOURTH_AVAILABLE_START_TIME,
+    endTime: FOURTH_AVAILABLE_END_TIME,
     accent: 'canadian',
+  },
+  {
+    name: 'Emma',
+    profile: ProfileJPEG,
+    college: 'Harvard University',
+    major: 'Computer Science',
+    acceptPercentage: 90,
+    lesson: {
+      duration: 40,
+      number: 8,
+    },
+    startTime: FOURTH_AVAILABLE_START_TIME,
+    endTime: FOURTH_AVAILABLE_END_TIME,
+    tags: ['STEM'],
+    accent: 'american',
+  },
+  {
+    name: 'Ethan',
+    profile: ProfileJPEG,
+    college: 'Stanford University',
+    major: 'Electrical Engineering',
+    acceptPercentage: 80,
+    lesson: {
+      duration: 40,
+      number: 12,
+    },
+    startTime: FOURTH_AVAILABLE_START_TIME,
+    endTime: FOURTH_AVAILABLE_END_TIME,
+    tags: ['STEM'],
+    accent: 'american',
+  },
+  {
+    name: 'Sophia',
+    profile: ProfileJPEG,
+    college: 'Massachusetts Institute of Technology (MIT)',
+    major: 'Physics',
+    acceptPercentage: 95,
+    lesson: {
+      duration: 40,
+      number: 15,
+    },
+    startTime: FOURTH_AVAILABLE_START_TIME,
+    endTime: FOURTH_AVAILABLE_END_TIME,
+    tags: ['STEM'],
+    accent: 'american',
   },
 ];
