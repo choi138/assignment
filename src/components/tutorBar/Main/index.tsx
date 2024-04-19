@@ -5,6 +5,7 @@ import { TUTOR_MENUS, TutorInterface, TutorMenuItems, TUTORS } from 'src/constan
 import { classDayStore, RootState } from 'src/store';
 import { selectedTutorStore } from 'src/store/tutorSelection';
 import { useCheckAvailableClassTime } from 'src/hooks';
+import { formatDate } from 'src/utils';
 
 import { TutorBox } from '../TutorBox';
 import { TutorFilterSection } from '../TutorFilterSection';
@@ -21,20 +22,6 @@ export const TutorBar: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<TutorMenuItems['type']>('available');
   const [tutorAccent, setTutorAccent] = useState<string>('');
   const [tutorMajor, setTutorMajor] = useState<string>('');
-
-  const formatDate = () => {
-    const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
-    if (!classDay) return '';
-
-    const month = classDay.getMonth() + 1;
-    const day = classDay.getDate();
-    const weekday = weekdays[classDay.getDay()];
-    const hours = classDay.getHours();
-    const amOrPm = hours === 0 ? '자정' : hours < 12 ? '오전' : '오후';
-    const formattedHours = hours % 12 || '00';
-    const minutes = String(classDay.getMinutes()).padStart(2, '0');
-    return `${month}월 ${day}일(${weekday}) ${amOrPm} ${formattedHours}:${minutes}`;
-  };
 
   const onTutorClick = (id: number) => {
     const foundTutor = TUTORS.find((tutor) => tutor.id === id);
@@ -73,36 +60,13 @@ export const TutorBar: React.FC = () => {
   return (
     <div className="sticky top-0 h-screen w-[35rem] border-l-[1.5px] border-border">
       <div className="h-full">
-        {tutor.find(({ startTime }) => startTime.toISOString() === classDay?.toISOString()) ? (
+        {tutor.find(({ startTime }) => startTime.toISOString() === classDay?.toISOString()) || !classDay ? (
+          <div className="h-full flex flex-col center text-[#b4bcc8] font-medium">아직 선택된 날짜가 없어요</div>
+        ) : (
           <>
             <div className="tutor-box">
               <div className="tutor-inner-box">
-                <h1>{formatDate()}</h1>
-              </div>
-            </div>
-            <div className="tutor-box h-full flex center">
-              <div className="tutor-inner-box flex flex-col gap-y-4">
-                <p className="font-medium text-[#AAAAAA]">
-                  이미 수업이 예약되었어요
-                  <br />
-                  수업을 삭제할까요?
-                </p>
-                <div className="flex center gap-x-2 cursor-pointer">
-                  <div className="day-box rounded-md py-1 shadow-none" onClick={onResetClassDay}>
-                    아니요
-                  </div>
-                  <div className="day-box rounded-md bg-primary text-white py-1 shadow-none" onClick={onRemoveTutor}>
-                    예
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : classDay ? (
-          <>
-            <div className="tutor-box">
-              <div className="tutor-inner-box">
-                <h1>{formatDate()}</h1>
+                <h1>{formatDate(classDay)}</h1>
               </div>
             </div>
             <div className="tutor-box border-0">
@@ -131,8 +95,6 @@ export const TutorBar: React.FC = () => {
               />
             ))}
           </>
-        ) : (
-          <div className="h-full flex flex-col center text-[#b4bcc8] font-medium">아직 선택된 날짜가 없어요</div>
         )}
       </div>
     </div>

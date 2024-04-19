@@ -6,6 +6,9 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { RootState, classDayStore } from 'src/store';
 import { TutorInterface } from 'src/constant';
+import { useModal } from 'src/provider';
+import { formatDate } from 'src/utils';
+import { selectedTutorStore } from 'src/store/tutorSelection';
 
 export interface EventCardProps {
   closed: boolean;
@@ -17,13 +20,49 @@ export interface EventCardProps {
 
 export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSelectedTime, selectedTime, tutor }) => {
   const { duration } = useSelector(({ selectTicketDurationStore }: RootState) => selectTicketDurationStore);
-
+  const { tutor: selectorTutor } = useSelector(({ selectedTutorStore }: RootState) => selectedTutorStore);
+  const { open, close } = useModal();
   const dispatch = useDispatch();
 
   const isOverHalfHour = startDate.getMinutes() >= 29;
 
+  const onRemoveTutor = () => {
+    const newTutor = selectorTutor.filter((t) => t.startTime.toISOString() !== startDate?.toISOString());
+    dispatch(selectedTutorStore.actions.setTutor(newTutor));
+  };
+
   const onClick = () => {
     if (closed) return;
+    if (tutor) {
+      return open({
+        children: (
+          <div className="w-full tutor-box h-full flex center p-0 border-0">
+            <div className="w-full tutor-inner-box p-0 flex flex-col gap-y-4">
+              <p className="text-left font-medium">{formatDate(startDate)}</p>
+              <div className="flex gap-x-1">
+                <img src={tutor.profile} alt={tutor.name} className="w-[2rem] h-[2rem] rounded-full object-cover" />
+                <p className="text-left font-medium">{tutor.name}</p>
+              </div>
+              <p className="font-medium text-[#AAAAAA]">
+                이미 수업이 예약되었어요
+                <br />
+                수업을 삭제할까요?
+              </p>
+              <div className="flex center gap-x-2 cursor-pointer">
+                <div className="flex center w-[40%] gap-x-2">
+                  <div className="day-box rounded-md py-1 shadow-none" onClick={() => close()}>
+                    아니요
+                  </div>
+                  <div className="day-box rounded-md bg-primary text-white py-1 shadow-none" onClick={onRemoveTutor}>
+                    예
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      });
+    }
     setSelectedTime(startDate);
     dispatch(classDayStore.actions.setDuration(startDate));
   };
