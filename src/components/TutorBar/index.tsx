@@ -55,7 +55,7 @@ export const TutorBar: React.FC = () => {
   };
 
   return (
-    <div className="sticky top-0 h-screen w-[20rem] border-l-[1.5px] border-border" style={{}}>
+    <div className="sticky top-0 h-screen w-[30rem] border-l-[1.5px] border-border" style={{}}>
       <div className="h-full">
         {classDay ? (
           <>

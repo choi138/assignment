@@ -28,19 +28,27 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
 
   if (duration === 40) {
     return (
-      <div
-        className="day-box"
-        style={{
-          boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -3px rgb(0 0 0 / 0.1)',
-          backgroundColor: selectedTime === startDate ? '#8575e4' : 'white',
-        }}
-        onClick={onClick}
-      >
-        <FontAwesomeIcon icon={faUser} style={selectedTimeStyle} />
-        <h1 style={selectedTimeStyle} className="text-placeHolder text-base max-xl:text-xs ">
-          튜터 선택
-        </h1>
-      </div>
+      <>
+        {closed ? (
+          <div className=" relative z-10 w-full flex center gap-x-2 h-full bg-[#E6EBF2]">
+            <h1 className="text-[#AAB4C6]">예약 마감</h1>
+          </div>
+        ) : (
+          <div
+            className="day-box"
+            style={{
+              boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -3px rgb(0 0 0 / 0.1)',
+              backgroundColor: selectedTime === startDate ? '#8575e4' : 'white',
+            }}
+            onClick={onClick}
+          >
+            <FontAwesomeIcon icon={faUser} style={selectedTimeStyle} />
+            <h1 style={selectedTimeStyle} className="text-placeHolder text-base max-xl:text-xs ">
+              튜터 선택
+            </h1>
+          </div>
+        )}
+      </>
     );
   } else
     return (
@@ -65,7 +73,7 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
             }}
           >
             <FontAwesomeIcon icon={faUser} style={selectedTimeStyle} />
-            <h1 style={selectedTimeStyle} className="text-placeHolder text-base max-xl:text-xs ">
+            <h1 style={selectedTimeStyle} className="text-placeHolder text-sm font-medium max-xl:text-xs ">
               튜터 선택
             </h1>
           </div>

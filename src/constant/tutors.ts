@@ -1,4 +1,4 @@
-import { setHours, setMinutes } from 'date-fns';
+import { add, setHours, setMinutes } from 'date-fns';
 
 import { ProfileJPEG } from 'src/assets';
 
@@ -22,11 +22,17 @@ export interface TutorInterface {
   accent: string;
 }
 
-const FIRST_AVAILABLE_START_TIME = setMinutes(setHours(new Date('2024-04-19'), 11), 0);
-const FIRST_AVAILABLE_END_TIME = setMinutes(setHours(new Date('2024-04-19'), 11), 30);
+const today = new Date();
+const tomorrow = add(today, { days: 1 });
 
-const SECOND_AVAILABLE_START_TIME = setMinutes(setHours(new Date('2024-04-20'), 0), 0);
-const SECOND_AVAILABLE_END_TIME = setMinutes(setHours(new Date('2024-04-20'), 1), 0);
+const FIRST_AVAILABLE_START_TIME = setMinutes(setHours(tomorrow, 0), 0);
+const FIRST_AVAILABLE_END_TIME = setMinutes(setHours(tomorrow, 0), 30);
+
+const SECOND_AVAILABLE_START_TIME = setMinutes(setHours(tomorrow, 1), 0);
+const SECOND_AVAILABLE_END_TIME = setMinutes(setHours(tomorrow, 1), 30);
+
+const THIRD_AVAILABLE_START_TIME = setMinutes(setHours(tomorrow, 5), 30);
+const THIRD_AVAILABLE_END_TIME = setMinutes(setHours(tomorrow, 6), 0);
 
 export const TUTORS: TutorInterface[] = [
   {
@@ -96,8 +102,8 @@ export const TUTORS: TutorInterface[] = [
     type: {
       recommend: true,
     },
-    startTime: FIRST_AVAILABLE_START_TIME,
-    endTime: FIRST_AVAILABLE_END_TIME,
+    startTime: SECOND_AVAILABLE_START_TIME,
+    endTime: SECOND_AVAILABLE_END_TIME,
     accent: 'American',
   },
   {
@@ -122,15 +128,15 @@ export const TUTORS: TutorInterface[] = [
     major: 'Engineering',
     acceptPercentage: 95,
     lesson: {
-      duration: 40,
+      duration: 20,
       number: 8,
     },
     tags: ['STEM', 'Tutor'],
     type: {
       recommend: true,
     },
-    startTime: SECOND_AVAILABLE_START_TIME,
-    endTime: SECOND_AVAILABLE_END_TIME,
+    startTime: THIRD_AVAILABLE_START_TIME,
+    endTime: THIRD_AVAILABLE_END_TIME,
     accent: 'australian',
   },
   {
@@ -140,11 +146,11 @@ export const TUTORS: TutorInterface[] = [
     major: 'Psychology',
     acceptPercentage: 85,
     lesson: {
-      duration: 40,
+      duration: 20,
       number: 12,
     },
-    startTime: SECOND_AVAILABLE_START_TIME,
-    endTime: SECOND_AVAILABLE_END_TIME,
+    startTime: THIRD_AVAILABLE_START_TIME,
+    endTime: THIRD_AVAILABLE_END_TIME,
     tags: ['Psychology'],
     accent: 'australian',
   },
@@ -155,15 +161,15 @@ export const TUTORS: TutorInterface[] = [
     major: 'Literature',
     acceptPercentage: 75,
     lesson: {
-      duration: 40,
+      duration: 20,
       number: 7,
     },
     tags: ['Literature', 'Tutor'],
     type: {
       marked: true,
     },
-    startTime: SECOND_AVAILABLE_START_TIME,
-    endTime: SECOND_AVAILABLE_END_TIME,
+    startTime: THIRD_AVAILABLE_START_TIME,
+    endTime: THIRD_AVAILABLE_END_TIME,
     accent: 'canadian',
   },
   {
@@ -173,11 +179,11 @@ export const TUTORS: TutorInterface[] = [
     major: 'Mathematics',
     acceptPercentage: 85,
     lesson: {
-      duration: 40,
+      duration: 20,
       number: 10,
     },
-    startTime: SECOND_AVAILABLE_START_TIME,
-    endTime: SECOND_AVAILABLE_END_TIME,
+    startTime: THIRD_AVAILABLE_START_TIME,
+    endTime: THIRD_AVAILABLE_END_TIME,
     tags: ['STEM'],
     accent: 'canadian',
   },
@@ -195,8 +201,8 @@ export const TUTORS: TutorInterface[] = [
     type: {
       marked: true,
     },
-    startTime: FIRST_AVAILABLE_START_TIME,
-    endTime: FIRST_AVAILABLE_END_TIME,
+    startTime: THIRD_AVAILABLE_START_TIME,
+    endTime: THIRD_AVAILABLE_START_TIME,
     accent: 'canadian',
   },
 ];

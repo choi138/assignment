@@ -53,7 +53,7 @@ export const Calendar: React.FC = () => {
 
   return (
     <div
-      className="flex flex-col gap-y-10 sticky h-fit py-8"
+      className=" w-fit flex flex-col gap-y-10 sticky h-fit py-8"
       style={{
         position: 'sticky',
         top: '0',
@@ -93,6 +93,20 @@ export const Calendar: React.FC = () => {
         }}
         formatters={{ formatCaption }}
         locale={ko}
+        styles={{
+          head_cell: {
+            fontSize: '0.8rem',
+            color: '#afafaf',
+            fontWeight: 400,
+          },
+          cell: {
+            fontSize: '0.8rem',
+          },
+          caption_label: {
+            fontSize: '1.1rem',
+            fontWeight: 500,
+          },
+        }}
       />
     </div>
   );

@@ -5,6 +5,10 @@
   --color-primaryHover: #e7e3ff;
 }
 
+.rdp {
+  --rdp-cell-size: 1.8rem;
+}
+
 .rdp-day_outside {
   opacity: 1;
 }

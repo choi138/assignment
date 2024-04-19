@@ -16,10 +16,9 @@ const TimeCell: React.FC<{ cell: Cell; cellIndex: number }> = ({ cell, cellIndex
       position: 'relative',
       gridRowStart: cellIndex + 2,
       gridRowEnd: cellIndex + 2,
-      bottom: '12px',
     }}
   >
-    <span className="absolute top-0 left-0  text-l text-[#AEBACC] px-1">{cell.hourAndMinute}</span>
+    <span className="absolute top-0 left-0 font-medium text-sm text-[#AEBACC] px-1">{cell.hourAndMinute}</span>
     {(cell.hourAndMinute === '새벽 3시' || cell.hourAndMinute === '오후 14시') && (
       <FontAwesomeIcon icon={faEllipsisVertical} className=" relative top-[10px] " color="#E6EBF2" />
     )}
@@ -63,7 +62,7 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: sched
           {days.map(({ isToday, isWeekend, dayOfMonthWithZero, date, shortName }) => (
             <div key={getUnixTime(date)} className={`flex items-center justify-center`}>
               <div className={`flex-col center ${isWeekend ? 'text-weekend' : 'text-black'}`}>
-                <p>{shortName}</p>
+                <p className=" text-sm">{shortName}</p>
                 <span
                   className={`
                 text-xl

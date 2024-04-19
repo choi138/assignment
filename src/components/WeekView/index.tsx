@@ -31,7 +31,7 @@ export const WeekView: React.FC = () => {
       <WeekViewHeader goToToday={goToToday} nextWeek={nextWeek} previousWeek={previousWeek} />
       <Grid
         days={days}
-        rowHeight={6}
+        rowHeight={5.2}
         scheduleData={SCHEDULES_DATA.filter(({ duration }) => duration === selectorDuration)}
       />
     </div>
