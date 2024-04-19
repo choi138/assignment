@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +7,7 @@ import { getMinutes, getUnixTime, isSameDay } from 'date-fns';
 
 import { Cell, Days } from 'src/hooks';
 import { ScheduleDataItems } from 'src/constant/schedule';
+import { RootState } from 'src/store';
 
 import { EventCard } from '../EventCard';
 
@@ -32,6 +34,7 @@ export interface GridProps {
 }
 
 export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: schedules }) => {
+  const { tutor } = useSelector(({ selectedTutorStore }: RootState) => selectedTutorStore);
   const [selectedTime, setSelectedTime] = useState<Date | null>(null);
 
   return (
@@ -109,10 +112,13 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: sched
                       })
                       .map(({ closed, startDate }, scheduleIndex) => {
                         const isPastTime = cell.disabled;
-
+                        const filteredTutor = tutor.filter(
+                          ({ startTime }) => startTime.toISOString() === startDate.toISOString(),
+                        );
                         return (
                           !isPastTime && (
                             <EventCard
+                              tutor={tutor.length > 0 ? filteredTutor[0] : null}
                               key={scheduleIndex}
                               closed={closed}
                               startDate={startDate}

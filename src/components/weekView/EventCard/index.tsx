@@ -5,18 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { RootState, classDayStore } from 'src/store';
+import { TutorInterface } from 'src/constant';
 
 export interface EventCardProps {
   closed: boolean;
   startDate: Date;
   setSelectedTime: React.Dispatch<React.SetStateAction<Date | null>>;
   selectedTime: Date | null;
+  tutor: TutorInterface | null;
 }
 
-export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSelectedTime, selectedTime }) => {
+export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSelectedTime, selectedTime, tutor }) => {
   const { duration } = useSelector(({ selectTicketDurationStore }: RootState) => selectTicketDurationStore);
-  const { tutor } = useSelector(({ selectedTutorStore }: RootState) => selectedTutorStore);
-  console.log(tutor);
 
   const dispatch = useDispatch();
 
@@ -34,14 +34,18 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
     return (
       <>
         {closed ? (
-          <div className=" relative z-10 w-full flex center gap-x-2 h-full bg-[#E6EBF2]">
-            <h1 className="text-[#AAB4C6]">예약 마감</h1>
+          <div className="day-closed">
+            <h1>예약 마감</h1>
+          </div>
+        ) : tutor ? (
+          <div className="day-box bg-primary">
+            <img src={tutor.profile} alt={tutor.name} className="w-[2rem] h-[2rem] rounded-full object-cover" />
+            <p className="text-white text-base max-xl:text-xs font-bold">선택 완료</p>
           </div>
         ) : (
           <div
-            className="day-box "
+            className="day-box"
             style={{
-              boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -3px rgb(0 0 0 / 0.1)',
               backgroundColor: selectedTime === startDate ? '#8575e4' : 'white',
             }}
             onClick={onClick}
@@ -65,15 +69,20 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
         onClick={onClick}
       >
         {closed ? (
-          <div className=" relative z-10 w-full flex center gap-x-2 h-full bg-[#E6EBF2]">
-            <h1 className="text-[#AAB4C6]">예약 마감</h1>
+          <div className="day-closed">
+            <h1>예약 마감</h1>
+          </div>
+        ) : tutor ? (
+          <div className="day-box bg-primary">
+            <img src={tutor.profile} alt={tutor.name} className="w-[1.4rem] h-[1.4rem] rounded-full object-cover" />
+            <p className="text-white text-sm max-xl:text-xs font-bold">선택 완료</p>
           </div>
         ) : (
           <div
             className="day-box"
             style={{
-              boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -3px rgb(0 0 0 / 0.1)',
-              backgroundColor: selectedTime === startDate ? '#8575e4' : 'white',
+              backgroundColor: selectedTime === startDate ? '#9A8AFB' : 'white',
+              border: selectedTime === startDate ? '1px solid #9A8AFB' : '1px solid #E2E7EB',
             }}
           >
             <FontAwesomeIcon icon={faUser} style={selectedTimeStyle} />

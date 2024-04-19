@@ -23,7 +23,7 @@ export const TutorBox: React.FC<TutorBoxProps> = ({
   onClick,
 }) => {
   return (
-    <div className="tutor-box" onClick={onClick}>
+    <div className="tutor-box hover:bg-slate-100 transition-all duration-150 ease-in-out" onClick={onClick}>
       <div className="tutor-inner-box flex flex-row gap-x-1">
         <div className="flex flex-col gap-y-2 flex-1">
           <div className="flex gap-4">
@@ -44,19 +44,9 @@ export const TutorBox: React.FC<TutorBoxProps> = ({
           </div>
         </div>
         {selectAble && (
-          <div className="flex flex-col align-center justify-center">
-            <FontAwesomeIcon
-              className="color-transition"
-              icon={faCircleCheck}
-              size="xl"
-              color={selected ? '#8575E4' : '#BBC6DA'}
-            />
-            <span
-              className="text-[0.8rem] text-center font-medium color-transition"
-              style={{ color: selected ? '#8575E4' : '#BBC6DA' }}
-            >
-              선택하기
-            </span>
+          <div className="flex flex-col align-center justify-center select-container">
+            <FontAwesomeIcon className="text-[#BBC6DA] color-transition" icon={faCircleCheck} size="xl" />
+            <span className="text-[0.8rem] text-[#BBC6DA] text-center font-medium color-transition">선택하기</span>
           </div>
         )}
       </div>

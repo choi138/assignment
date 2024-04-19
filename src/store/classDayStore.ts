@@ -8,7 +8,7 @@ export const classDayStore = createSlice({
   name: 'classDayStore',
   initialState: { classDay: null } as ClassDayStoreProp,
   reducers: {
-    setDuration: (state, action: { payload: Date }) => {
+    setDuration: (state, action: { payload: Date | null }) => {
       state.classDay = action.payload;
       return state;
     },
