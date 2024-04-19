@@ -7,7 +7,8 @@ import { TutorInterface } from 'src/constant';
 
 export type TutorBoxProps = TutorInterface & {
   selected?: boolean;
-  onClick?: () => void;
+  onClick: () => void;
+  selectAble: boolean;
 };
 
 export const TutorBox: React.FC<TutorBoxProps> = ({
@@ -18,6 +19,7 @@ export const TutorBox: React.FC<TutorBoxProps> = ({
   acceptPercentage,
   lesson,
   selected = false,
+  selectAble = true,
   onClick,
 }) => {
   return (
@@ -41,12 +43,22 @@ export const TutorBox: React.FC<TutorBoxProps> = ({
             </p>
           </div>
         </div>
-        <div className="flex flex-col align-center justify-center">
-          <FontAwesomeIcon icon={faCircleCheck} size="xl" color={selected ? '#8575E4' : '#BBC6DA'} />
-          <span className="text-[0.8rem] text-center font-medium" style={{ color: selected ? '#8575E4' : '#BBC6DA' }}>
-            선택하기
-          </span>
-        </div>
+        {selectAble && (
+          <div className="flex flex-col align-center justify-center">
+            <FontAwesomeIcon
+              className="color-transition"
+              icon={faCircleCheck}
+              size="xl"
+              color={selected ? '#8575E4' : '#BBC6DA'}
+            />
+            <span
+              className="text-[0.8rem] text-center font-medium color-transition"
+              style={{ color: selected ? '#8575E4' : '#BBC6DA' }}
+            >
+              선택하기
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

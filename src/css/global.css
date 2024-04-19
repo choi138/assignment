@@ -35,4 +35,8 @@
   .tutor-inner-box {
     @apply px-4 py-4;
   }
+
+  .color-transition {
+    transition: color 100ms ease-in;
+  }
 }

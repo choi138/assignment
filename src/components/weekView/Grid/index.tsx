@@ -87,7 +87,6 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: sched
           {days.map((day, dayIndex) =>
             day.cells.map((cell, cellIndex) => {
               const disableSelectedTime = cell.hourAndMinute === '새벽 3시' || cell.hourAndMinute === '오후 14시';
-
               return (
                 <button
                   key={getUnixTime(cell.date)}
@@ -100,17 +99,7 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: sched
                     gridColumnEnd: dayIndex + 2,
                   }}
                 >
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      height: '100%',
-                      borderTop: '1px dashed #E2E7EB',
-                    }}
-                  />
+                  <div className="absolute top-1/2 left-0 right-0 bottom-0 h-full border-dashed border-t border-border" />
                   {(schedules || []).map(({ schedules }) =>
                     schedules
                       .filter(({ startDate }) => {

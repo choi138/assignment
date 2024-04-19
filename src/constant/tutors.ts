@@ -3,6 +3,7 @@ import { add, setHours, setMinutes } from 'date-fns';
 import { ProfileJPEG } from 'src/assets';
 
 export interface TutorInterface {
+  id: number;
   name: string;
   profile: string;
   college: string;
@@ -39,6 +40,7 @@ const FOURTH_AVAILABLE_END_TIME = setMinutes(setHours(tomorrow, 0), 30);
 
 export const TUTORS: TutorInterface[] = [
   {
+    id: 1,
     name: 'Dominic',
     profile: ProfileJPEG,
     college: 'University of Oxford',
@@ -56,6 +58,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'British',
   },
   {
+    id: 2,
     name: 'Bao',
     profile: ProfileJPEG,
     college: 'Yale University',
@@ -74,6 +77,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'American',
   },
   {
+    id: 3,
     name: 'Aadhya',
     profile: ProfileJPEG,
     college: 'New York University',
@@ -92,6 +96,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'American',
   },
   {
+    id: 4,
     name: 'Sophia',
     profile: ProfileJPEG,
     college: 'Stanford University',
@@ -110,6 +115,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'American',
   },
   {
+    id: 5,
     name: 'Elijah',
     profile: ProfileJPEG,
     college: 'Harvard University',
@@ -125,6 +131,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'American',
   },
   {
+    id: 6,
     name: 'Ava',
     profile: ProfileJPEG,
     college: 'Massachusetts Institute of Technology',
@@ -143,6 +150,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'australian',
   },
   {
+    id: 7,
     name: 'Mason',
     profile: ProfileJPEG,
     college: 'University of California, Berkeley',
@@ -158,6 +166,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'australian',
   },
   {
+    id: 8,
     name: 'Luna',
     profile: ProfileJPEG,
     college: 'Columbia University',
@@ -176,6 +185,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'canadian',
   },
   {
+    id: 9,
     name: 'Liam',
     profile: ProfileJPEG,
     college: 'Princeton University',
@@ -191,6 +201,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'canadian',
   },
   {
+    id: 10,
     name: 'Olivia',
     profile: ProfileJPEG,
     college: 'University of Cambridge',
@@ -209,6 +220,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'canadian',
   },
   {
+    id: 11,
     name: 'Emma',
     profile: ProfileJPEG,
     college: 'Harvard University',
@@ -224,6 +236,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'American',
   },
   {
+    id: 12,
     name: 'Ethan',
     profile: ProfileJPEG,
     college: 'Stanford University',
@@ -239,6 +252,7 @@ export const TUTORS: TutorInterface[] = [
     accent: 'American',
   },
   {
+    id: 13,
     name: 'Sophia',
     profile: ProfileJPEG,
     college: 'Massachusetts Institute of Technology (MIT)',

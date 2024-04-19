@@ -15,6 +15,9 @@ export interface EventCardProps {
 
 export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSelectedTime, selectedTime }) => {
   const { duration } = useSelector(({ selectTicketDurationStore }: RootState) => selectTicketDurationStore);
+  const { tutor } = useSelector(({ selectedTutorStore }: RootState) => selectedTutorStore);
+  console.log(tutor);
+
   const dispatch = useDispatch();
 
   const isOverHalfHour = startDate.getMinutes() >= 29;
