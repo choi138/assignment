@@ -11,8 +11,11 @@ export interface TutorInterface {
     number: number;
   };
   tags?: string[];
-  recommend?: boolean;
-  marked?: boolean;
+  type?: {
+    available?: boolean;
+    recommend?: boolean;
+    marked?: boolean;
+  };
   accent: string;
 }
 
@@ -27,7 +30,10 @@ export const TUTORS: TutorInterface[] = [
       duration: 20,
       number: 9,
     },
-    marked: true,
+    type: {
+      available: true,
+      marked: true,
+    },
     accent: 'British',
   },
   {
@@ -41,7 +47,10 @@ export const TUTORS: TutorInterface[] = [
       number: 3,
     },
     tags: ['University'],
-    recommend: true,
+    type: {
+      recommend: true,
+      available: true,
+    },
     accent: 'American',
   },
   {
@@ -55,7 +64,10 @@ export const TUTORS: TutorInterface[] = [
       number: 19,
     },
     tags: ['Tutor'],
-    marked: true,
+    type: {
+      available: true,
+      marked: true,
+    },
     accent: 'American',
   },
   {
@@ -69,7 +81,9 @@ export const TUTORS: TutorInterface[] = [
       number: 15,
     },
     tags: ['STEM'],
-    recommend: true,
+    type: {
+      recommend: true,
+    },
     accent: 'American',
   },
   {
@@ -96,7 +110,9 @@ export const TUTORS: TutorInterface[] = [
       number: 8,
     },
     tags: ['STEM', 'Tutor'],
-    recommend: true,
+    type: {
+      recommend: true,
+    },
     accent: 'australian',
   },
   {
@@ -123,7 +139,10 @@ export const TUTORS: TutorInterface[] = [
       number: 7,
     },
     tags: ['Literature', 'Tutor'],
-    marked: true,
+    type: {
+      available: true,
+      marked: true,
+    },
     accent: 'canadian',
   },
   {
@@ -135,6 +154,9 @@ export const TUTORS: TutorInterface[] = [
     lesson: {
       duration: 40,
       number: 10,
+    },
+    type: {
+      available: true,
     },
     tags: ['STEM'],
     accent: 'canadian',
@@ -150,7 +172,10 @@ export const TUTORS: TutorInterface[] = [
       number: 8,
     },
     tags: ['History', 'Tutor'],
-    marked: true,
+    type: {
+      available: true,
+      marked: true,
+    },
     accent: 'canadian',
   },
 ];

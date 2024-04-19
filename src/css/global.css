@@ -33,6 +33,6 @@
   }
 
   .tutor-inner-box {
-    @apply p-4;
+    @apply px-2 py-4;
   }
 }
