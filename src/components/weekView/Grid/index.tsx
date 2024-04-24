@@ -103,7 +103,7 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: sched
                   }}
                 >
                   <div className="absolute top-1/2 left-0 right-0 bottom-0 h-full border-dashed border-t border-border" />
-                  {(schedules || []).map(({ schedules }) =>
+                  {(schedules || []).map(({ schedules, duration }) =>
                     schedules
                       .filter(({ startDate }) => {
                         const sameDay = isSameDay(startDate, cell.date);
@@ -113,7 +113,8 @@ export const Grid: React.FC<GridProps> = ({ days, rowHeight, scheduleData: sched
                       .map(({ closed, startDate }, scheduleIndex) => {
                         const isPastTime = cell.disabled;
                         const filteredTutor = tutor.filter(
-                          ({ startTime }) => startTime.toISOString() === startDate.toISOString(),
+                          ({ startTime, lesson }) =>
+                            startTime.toISOString() === startDate.toISOString() && duration === lesson.duration,
                         );
                         return (
                           !isPastTime && (

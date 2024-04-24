@@ -8,9 +8,10 @@ import { endOfWeek, format, lastDayOfWeek, startOfWeek } from 'date-fns';
 
 import { startOfTheWeekStore } from 'src/store/startOfTheWeekStore';
 import { RootState } from 'src/store/store';
-import './styles.css';
 import { TICKETS, TICKET_STATUS } from 'src/constant';
 import { selectTicketDurationStore } from 'src/store';
+
+import './styles.css';
 
 export const Calendar: React.FC = () => {
   const selectedWeekDay = useSelector((state: RootState) => state.startOfTheWeekStore);

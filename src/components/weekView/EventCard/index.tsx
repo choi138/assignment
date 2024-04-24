@@ -33,7 +33,6 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
   };
 
   const onClick = () => {
-    if (closed) return;
     if (tutor) {
       return open({
         children: (
@@ -64,6 +63,7 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
         ),
       });
     }
+    if (closed) return;
     setSelectedTime(startDate);
     dispatch(classDayStore.actions.setDuration(startDate));
   };
@@ -79,8 +79,8 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
           </div>
         ) : tutor ? (
           <div className="day-box bg-primary" onClick={onClick}>
-            <img src={tutor.profile} alt={tutor.name} className="w-[2rem] h-[2rem] rounded-full object-cover" />
-            <p className="text-white text-base max-xl:text-xs font-bold">선택 완료</p>
+            <img src={tutor.profile} alt={tutor.name} className="w-[1.4rem] h-[1.4rem] rounded-full object-cover" />
+            <p className="text-white text-sm max-xl:text-xs font-bold">선택 완료</p>
           </div>
         ) : (
           <div
@@ -122,7 +122,6 @@ export const EventCard: React.FC<EventCardProps> = ({ closed, startDate, setSele
             className="day-box"
             style={{
               backgroundColor: selectedTime === startDate ? '#9A8AFB' : 'white',
-              border: selectedTime === startDate ? '1px solid #9A8AFB' : '1px solid #E2E7EB',
             }}
           >
             <FontAwesomeIcon icon={faUser} style={selectedTimeStyle} />

@@ -72,9 +72,12 @@ export const TutorBar: React.FC = () => {
   };
 
   return (
-    <div className="sticky top-0 h-screen w-[35rem] border-l-[1.5px] border-border">
-      <div className="h-full">
-        {tutor.find(({ startTime }) => startTime.toISOString() === classDay?.toISOString()) || !classDay ? (
+    <div className="sticky top-0 h-screen w-[30rem] border-l-[1.5px] border-border overflow-scroll">
+      <div>
+        {tutor.find(
+          ({ startTime, lesson }) =>
+            startTime.toISOString() === classDay?.toISOString() && duration === lesson.duration,
+        ) || !classDay ? (
           <div className="h-full flex flex-col center text-[#b4bcc8] font-medium">아직 선택된 날짜가 없어요</div>
         ) : (
           <>
@@ -103,14 +106,16 @@ export const TutorBar: React.FC = () => {
                 <p className=" text-[0.8rem] text-[#AAB4C6] font-medium">{dynamicDescription()}</p>
               </div>
             </div>
-            {TUTORS.filter(filterTutors).map((t) => (
-              <TutorBox
-                key={t.id}
-                {...t}
-                onClick={() => onTutorClick(t.id)}
-                selectAble={selectedMenu === 'available'}
-              />
-            ))}
+            <div>
+              {TUTORS.filter(filterTutors).map((t) => (
+                <TutorBox
+                  key={t.id}
+                  {...t}
+                  onClick={() => onTutorClick(t.id)}
+                  selectAble={selectedMenu === 'available'}
+                />
+              ))}
+            </div>
           </>
         )}
       </div>
